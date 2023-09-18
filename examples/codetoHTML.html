@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="src/bonezegei-web.css" />
+    <link rel="stylesheet" href="src/bonezegei-codeview.css" />
+    <script src="src/bonezegei-codeview.js" type="module"></script>
+  </head>
+
+  <body>
+    <p>Insert Code Here</p>
+    <textarea
+      id="codeArea"
+      style="width: 95%; height: 300px; resize: none"
+    ></textarea>
+    <br />
+    <input
+      class="btn blue"
+      type="submit"
+      onclick="getCodeConvert();"
+      value="Convert"
+    />
+    <br /><br />
+    <p>Copy this text for HTML Code</p>
+    <textarea
+      id="codeAreaStr"
+      style="width: 95%; height: 200px; resize: none"
+    ></textarea>
+    <br /><br />
+    <p>Output on HTML</p>
+    <div
+      id="output2"
+      style="background-color: #f0f0f0; padding: 2px 10px"
+    ></div>
+    <textarea id="codeAreaStrDummy" style="width: 1px; height: 1px"></textarea>
+  </body>
+  <script>
+    function getCodeConvert() {
+      var str = "";
+      var strout = "";
+      console.log(codeArea.value.length);
+      for (var a = 0; a < codeArea.value.length; a++) {
+        if (codeArea.value.charAt(a) == "\n") {
+          str += "\\n";
+          strout += "\n";
+        } else if (codeArea.value.charAt(a) == "<") {
+          str += "&amplt;";
+          strout += "&amplt;";
+        } else if (codeArea.value.charAt(a) == "\t") {
+          str += "     ";
+          strout += "     ";
+        } else if (codeArea.value.charAt(a) == '"') {
+          str += '\\"';
+          strout += '"';
+        } else if (codeArea.value.charAt(a) == "'") {
+          str += "'";
+          strout += "'";
+        } else if (codeArea.value.charAt(a) == "\\") {
+          str += "\\\\";
+          strout += "\\";
+        } else {
+          str += codeArea.value.charAt(a);
+          strout += codeArea.value.charAt(a);
+        }
+      }
+
+      codeAreaStr.innerHTML = str;
+      codeAreaStrDummy.innerHTML = strout;
+      document.getElementById("output2").innerHTML =
+        " <pre> <code>" + codeAreaStrDummy.value + "  </code> </pre>";
+
+      console.log(str);console.log(strout);
+    }
+  </script>
+</html>
