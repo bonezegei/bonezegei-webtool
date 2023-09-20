@@ -1,1 +1,57 @@
 
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="src/bonezegei-codeview.css" />
+    <link rel="stylesheet" href="src/bonezegei-web.css" />
+    <script src="src/bonezegei-codeview.js" type="module"></script>
+  </head>
+
+  <body>
+    <p>Insert Code Here</p>
+    <textarea
+      id="codeArea"
+      style="width: 99%; height: 300px; resize: none"
+    ></textarea>
+    <br />
+    <input
+      class="btn blue"
+      type="submit"
+      onclick="getCode();"
+      value="Convert"
+    />
+    <br /><br />
+    <p>String Output</p>
+    <textarea
+      id="codeAreaStr"
+      style="width: 99%; height: 200px; resize: none"
+    ></textarea>
+    <br /><br />
+  </body>
+  <script>
+    function getCode() {
+      var str = "";
+      var strout = "";
+      console.log(codeArea.value.length);
+      for (var a = 0; a < codeArea.value.length; a++) {
+        if (codeArea.value.charAt(a) == "\n") {
+        } else if (codeArea.value.charAt(a) == "\t") {
+        } else if (codeArea.value.charAt(a) == '"') {
+          str += '\\"';
+          strout += '"';
+        } else if (codeArea.value.charAt(a) == "'") {
+          str += "'";
+          strout += "'";
+        } else if (codeArea.value.charAt(a) == "\\") {
+          str += "\\\\";
+          strout += "\\";
+        } else {
+          str += codeArea.value.charAt(a);
+          strout += codeArea.value.charAt(a);
+        }
+      }
+      codeAreaStr.innerHTML = str;
+    }
+  </script>
+</html>
